@@ -26,6 +26,10 @@ namespace krogercart.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("CartID");
 
                     b.ToTable("Carts");

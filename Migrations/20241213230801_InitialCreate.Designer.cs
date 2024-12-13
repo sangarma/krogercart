@@ -11,7 +11,7 @@ using krogercart.Models;
 namespace krogercart.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241213212726_InitialCreate")]
+    [Migration("20241213230801_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,6 +27,10 @@ namespace krogercart.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("CartID");
