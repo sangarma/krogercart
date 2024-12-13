@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "E:\\advbus\\week13\\final_project\\krogercart\\wwwroot\\img\\productimage.jpg",
+      "PackagePath": "staticwebassets\\img\\productimage.jpg"
+    },
+    {
       "Id": "E:\\advbus\\week13\\final_project\\krogercart\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

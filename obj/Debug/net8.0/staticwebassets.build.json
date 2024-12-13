@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/jTKLgGNifpWP1eO57DWZcHbiyPI76qSllCDMGPYNxs=",
+  "Hash": "lmnp/dr9BkYc19Yf64aJDuOo3du6B5gTNESGJn6Ei/A=",
   "Source": "krogercart",
   "BasePath": "_content/krogercart",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "E:\\advbus\\week13\\final_project\\krogercart\\wwwroot\\img\\productimage.jpg",
+      "SourceId": "krogercart",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\advbus\\week13\\final_project\\krogercart\\wwwroot\\",
+      "BasePath": "_content/krogercart",
+      "RelativePath": "img/productimage.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\productimage.jpg"
     },
     {
       "Identity": "E:\\advbus\\week13\\final_project\\krogercart\\wwwroot\\js\\site.js",
