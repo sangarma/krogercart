@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Cart Items";
+    decimal totalPrice = 0; 
 }
 
 <h1>Items in Your Cart</h1>
@@ -10,22 +11,22 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductCart[0].Product.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductCart[0].Quantity)
-            </th>
-            <th>
-                Price
-            </th>
+            <th></th>
+            <th>@Html.DisplayNameFor(model => model.ProductCart[0].Product.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductCart[0].Quantity)</th>
+            <th>Price</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
     @foreach (var item in Model.ProductCart)
     {
+        var itemTotal = item.Quantity * item.Product.Price; 
+        totalPrice += itemTotal; 
         <tr>
+            <td>
+                <img src="/img/productimage.jpg" alt="@item.Product.Name" style="width:100px; height:auto;" />
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Name)
             </td>
@@ -33,14 +34,18 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @((item.Quantity * item.Product.Price).ToString("C"))
+                @itemTotal.ToString("C")
             </td>
             <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ProductCartID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ProductCartID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ProductCartID">Delete</a>
-                </td>
+                <a asp-page="./Edit" asp-route-cartId="@item.CartID" asp-route-productId="@item.ProductID">Edit</a> |
+                <a asp-page="./Details" asp-route-cartId="@item.CartID" asp-route-productId="@item.ProductID">Details</a> |
+                <a asp-page="./Delete" asp-route-cartId="@item.CartID" asp-route-productId="@item.ProductID">Remove</a>
+            </td>
         </tr>
     }
     </tbody>
 </table>
+
+<div class="text-end mt-3">
+    <h4>Total Price: @totalPrice.ToString("C")</h4>
+</div>

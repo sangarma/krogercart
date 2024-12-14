@@ -21,36 +21,38 @@ namespace krogercart.Pages_ProductCarts
         [BindProperty]
         public ProductCart ProductCart { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? cartId, int? productId)
         {
-            if (id == null)
+            if (cartId == null || productId == null)
             {
                 return NotFound();
             }
 
-            var productcart = await _context.ProductCarts.FirstOrDefaultAsync(m => m.CartID == id);
+            ProductCart = await _context.ProductCarts
+                .Include(pc => pc.Product)
+                .Include(pc => pc.Cart)
+                .FirstOrDefaultAsync(pc => pc.CartID == cartId && pc.ProductID == productId);
 
-            if (productcart is not null)
+            if (ProductCart == null)
             {
-                ProductCart = productcart;
-
-                return Page();
+                return NotFound();
             }
 
-            return NotFound();
+            return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? cartId, int? productId)
         {
-            if (id == null)
+            if (cartId == null || productId == null)
             {
                 return NotFound();
             }
 
-            var productcart = await _context.ProductCarts.FindAsync(id);
-            if (productcart != null)
+            ProductCart = await _context.ProductCarts
+                .FirstOrDefaultAsync(pc => pc.CartID == cartId && pc.ProductID == productId);
+
+            if (ProductCart != null)
             {
-                ProductCart = productcart;
                 _context.ProductCarts.Remove(ProductCart);
                 await _context.SaveChangesAsync();
             }

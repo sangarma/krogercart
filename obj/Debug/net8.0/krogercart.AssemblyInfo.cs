@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("krogercart")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+229386f56f1da02b4cb4136c127b9f0f422c84bc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac782bfc46810bc247bba758cb15b24cf0d6801a")]
 [assembly: System.Reflection.AssemblyProductAttribute("krogercart")]
 [assembly: System.Reflection.AssemblyTitleAttribute("krogercart")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

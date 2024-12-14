@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using krogercart.Models;
 
@@ -22,26 +18,26 @@ namespace krogercart.Pages_ProductCarts
         [BindProperty]
         public ProductCart ProductCart { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? cartId, int? productId)
         {
-            if (id == null)
+            if (cartId == null || productId == null)
             {
                 return NotFound();
             }
 
-            var productcart =  await _context.ProductCarts.FirstOrDefaultAsync(m => m.CartID == id);
-            if (productcart == null)
+            
+            ProductCart = await _context.ProductCarts
+                .Include(pc => pc.Product)
+                .FirstOrDefaultAsync(m => m.CartID == cartId && m.ProductID == productId);
+
+            if (ProductCart == null)
             {
                 return NotFound();
             }
-            ProductCart = productcart;
-           ViewData["CartID"] = new SelectList(_context.Carts, "CartID", "CartID");
-           ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID");
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -49,6 +45,7 @@ namespace krogercart.Pages_ProductCarts
                 return Page();
             }
 
+            
             _context.Attach(ProductCart).State = EntityState.Modified;
 
             try
@@ -57,7 +54,7 @@ namespace krogercart.Pages_ProductCarts
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductCartExists(ProductCart.CartID))
+                if (!ProductCartExists(ProductCart.CartID, ProductCart.ProductID))
                 {
                     return NotFound();
                 }
@@ -70,9 +67,9 @@ namespace krogercart.Pages_ProductCarts
             return RedirectToPage("./Index");
         }
 
-        private bool ProductCartExists(int id)
+        private bool ProductCartExists(int cartId, int productId)
         {
-            return _context.ProductCarts.Any(e => e.CartID == id);
+            return _context.ProductCarts.Any(e => e.CartID == cartId && e.ProductID == productId);
         }
     }
 }

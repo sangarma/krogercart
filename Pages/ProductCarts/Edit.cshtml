@@ -5,28 +5,30 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit Item</h1>
 
-<h4>ProductCart</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Display Product Name -->
             <div class="form-group">
-                
-                <label asp-for="ProductCart.ProductCartID" class="control-label"></label>
-                <input asp-for="ProductCart.ProductCartID" class="form-control" />
-                <span asp-validation-for="ProductCart.ProductCartID" class="text-danger"></span>
+                <label class="control-label">Product Name</label>
+                <input value="@Model.ProductCart.Product.Name" class="form-control" readonly />
             </div>
+
+            <!-- Hidden Inputs for ProductID and CartID -->
             <input type="hidden" asp-for="ProductCart.ProductID" />
             <input type="hidden" asp-for="ProductCart.CartID" />
+
+            <!-- Editable Quantity -->
             <div class="form-group">
-                
                 <label asp-for="ProductCart.Quantity" class="control-label"></label>
                 <input asp-for="ProductCart.Quantity" class="form-control" />
                 <span asp-validation-for="ProductCart.Quantity" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,23 +17,23 @@ namespace krogercart.Pages_ProductCarts
 
         public ProductCart ProductCart { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? cartId, int? productId)
         {
-            if (id == null)
+            if (cartId == null || productId == null)
             {
                 return NotFound();
             }
 
-            var productcart = await _context.ProductCarts.FirstOrDefaultAsync(m => m.CartID == id);
+            ProductCart = await _context.ProductCarts
+                .Include(pc => pc.Product)
+                .FirstOrDefaultAsync(pc => pc.CartID == cartId && pc.ProductID == productId)!;
 
-            if (productcart is not null)
+            if (ProductCart == null)
             {
-                ProductCart = productcart;
-
-                return Page();
+                return NotFound();
             }
 
-            return NotFound();
+            return Page();
         }
     }
 }
